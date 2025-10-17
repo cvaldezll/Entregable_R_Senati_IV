@@ -10,6 +10,7 @@ library(tidyverse)
 library(dplyr)
 library(janitor)
 library(purrr)
+library(lubridate)
 
 # Para gráficos
 library(ggplot2)

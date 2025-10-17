@@ -35,4 +35,4 @@ map2_chr(nombres_columnas, tipos_columnas, ~ paste0(.x, " (", .y, ")")) %>%
 
 
 # DATA DE MUESTRA
-head(datos, 50)
+print(head(datos, 50))
