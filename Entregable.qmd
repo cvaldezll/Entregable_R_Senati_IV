@@ -1,0 +1,288 @@
+---
+title: "Entregable R"
+author: "Christian Valdez, Jair Pacahuala, Marck de la Cruz"
+format: html
+editor: visual
+---
+
+# UBER
+
+## Librerías de trabajo
+
+```{r}
+#install.packages("tidyverse")
+#install.packages("dslabs")
+#install.packages("janitor")
+#install.packages("plotly")
+
+
+# Para preparar la data
+library(tidyverse)
+library(dplyr)
+library(janitor)
+library(purrr)
+
+# Para gráficos
+library(ggplot2)
+library(scales) # Necesario para formatear el porcentaje
+```
+
+## Importando data
+
+```{r}
+datos <- read_csv(
+  "data/ncr_ride_bookings.csv",
+  na = c("null", ""),     # Trata "null" y cadenas vacías como NA (valor faltante)
+  quote = "\"\"\""       # Indica el carácter de comilla que rodea los campos (aquí, triple comilla)
+)
+head(datos)
+```
+
+### Limpiando estructura
+
+```{r}
+datos <- datos %>%
+  mutate(across(where(is.character), ~ str_remove_all(., "\""))) %>%
+  clean_names()
+head(datos)
+```
+
+### Estructura final
+
+```{r}
+# 1. Definimos una función segura para obtener la clase como una sola cadena
+get_single_class <- function(x) {
+  # Toma la clase y la convierte a una sola cadena de texto (ej. "hms, difftime")
+  return(toString(class(x)))
+}
+
+# 2. Obtenemos los nombres y aplicamos la función segura a todos los tipos
+nombres_columnas <- names(datos)
+tipos_columnas <- datos %>% 
+  purrr::map_chr(get_single_class) # Aplicamos la función segura
+
+# 3. Combinamos y formateamos la lista verticalmente
+map2_chr(nombres_columnas, tipos_columnas, ~ paste0(.x, " (", .y, ")")) %>%
+  cat(sep = "\n")
+```
+
+### Data de muestra
+
+```{r}
+head(datos, 50)
+```
+
+## En general
+
+```{r}
+# na.rm = TRUE para ignorar NAs si los hay
+datos %>%
+  summarise(
+    primer_reserva = min(date, na.rm = TRUE),
+    ultima_reserva = max(date, na.rm = TRUE)
+  )
+```
+
+```{r}
+datos %>%
+  summarise(
+    total_reservas = n()
+  )
+```
+
+### Gráfico pastel
+
+Data para el gráfico
+
+```{r}
+datos_pastel <- datos %>%
+  # cuenta por booking_status, genera columna de nombre n
+  count(booking_status) %>%
+  # ordenando por la columna n
+  arrange(n) %>%
+  # definiendo columnas adicionales
+  mutate(
+    # n es el total por booking_status
+    porcentaje = n/sum(n),
+    # etiqueta para cada booking_status
+    etiqueta_porc = percent(porcentaje, accuracy = 0.01),
+    # posición de la etiqueta de cada booking_status dentro del pastel
+    posicion_y = cumsum(porcentaje)-porcentaje/2,
+  )
+print(datos_pastel)
+```
+
+El gráfico
+
+```{r}
+ggplot(
+  datos_pastel, 
+  #aes(x = "", y = porcentaje, fill = booking_status)
+  aes(x = "", y = porcentaje, fill = paste0(booking_status," ",etiqueta_porc))
+) +
+  
+  # Capa de Geometría (barras)
+  geom_bar(stat = "identity", width = 1) +
+  
+  # Capa de Coordenadas (convierte a pastel)
+  coord_polar("y", start = 0) +
+  
+  # Capa de Etiquetas (solo el porcentaje)
+  #geom_text(aes(y = posicion_y, label = etiqueta_porc), color = "black") +
+  
+  # Etiquetas y limpieza básica de ejes
+  labs(
+    title = "Distribución de Estados de Reserva",
+    x = NULL, y = NULL,
+    fill = "Estado"
+  ) +
+  
+  # Tema: Elimina todos los elementos no esenciales
+  theme_void()
+```
+
+```{r}
+# Preparar data
+distancia_promedio <- datos %>%
+  filter(!is.na(ride_distance)) %>%
+  group_by(vehicle_type) %>%
+  summarise(promedio_distancia = mean(ride_distance, na.rm = TRUE)) %>%
+  arrange(desc(promedio_distancia))
+
+# Gráfico de barras verticales (todas las categorías visibles)
+ggplot(distancia_promedio, aes(x = reorder(vehicle_type, -promedio_distancia), 
+                               y = promedio_distancia, 
+                               fill = vehicle_type)) +
+  geom_col(show.legend = FALSE, width = 0.7) +
+  geom_text(aes(label = round(promedio_distancia, 2)), 
+            vjust = -0.3, size = 3, color = "black") +
+  labs(
+    title = "Distribución de la distancia de recorrido",
+    x = "Tipo de Vehículo",
+    y = "Distancia Promedio (km)"
+  ) +
+  theme_minimal(base_size = 12) +
+  theme(
+    plot.title = element_text(hjust = 0.5, face = "bold"),
+    axis.text.x = element_text(angle = 45, hjust = 1, size = 9)
+  ) +
+  scale_y_continuous(expand = expansion(mult = c(0, 0.1)))  # deja espacio arriba
+
+
+
+```
+
+## Ganancias
+
+```{r}
+# Instala los paquetes si no los tienes
+# install.packages(c("shiny", "plotly", "dplyr", "shinydashboard"))
+#install.packages(c("shiny", "plotly", "dplyr", "shinydashboard"))
+library(shiny)
+library(plotly)
+library(dplyr)
+library(shinydashboard)
+
+# ==== Datos de ejemplo ====
+set.seed(123)
+
+data <- data.frame(
+  day = 1:30,
+  ride_distance = sample(4000:9000, 30, replace = TRUE),
+  payment_method = sample(c("UPI", "Cash", "Uber Wallet", "Credit Card", "Debit Card"), 30, replace = TRUE),
+  booking_value = sample(50000:200000, 30, replace = TRUE)
+)
+
+top_customers <- data.frame(
+  Customer_ID = paste0("CID", sample(100000:999999, 5)),
+  Booking_Value = sample(3800:4100, 5)
+)
+
+# ==== Interfaz ====
+ui <- dashboardPage(
+  skin = "black",
+  dashboardHeader(title = "UBER Dashboard"),
+  dashboardSidebar(
+    sidebarMenu(
+      menuItem("Overall", tabName = "overall", icon = icon("dashboard")),
+      menuItem("Vehicle Type", tabName = "vehicle", icon = icon("car")),
+      menuItem("Revenue", tabName = "revenue", icon = icon("money-bill")),
+      menuItem("Cancellation", tabName = "cancel", icon = icon("ban")),
+      menuItem("Ratings", tabName = "star", icon = icon("star"))
+    )
+  ),
+  
+  dashboardBody(
+    tabItems(
+      tabItem(tabName = "revenue",
+              fluidRow(
+                box(width = 12, status = "primary",
+                    title = "Ride Distance Distribution",
+                    plotlyOutput("ride_plot", height = "300px"))
+              ),
+              fluidRow(
+                box(width = 8, status = "primary",
+                    title = "Revenue by Payment Method",
+                    plotlyOutput("payment_plot", height = "300px")),
+                box(width = 4, status = "info",
+                    title = "Top 5 Customers",
+                    tableOutput("top_customers"))
+              )
+      )
+    )
+  )
+)
+
+# ==== Servidor ====
+server <- function(input, output) {
+  
+  # Gráfico 1 - Ride Distance Distribution
+  output$ride_plot <- renderPlotly({
+    plot_ly(
+      data,
+      x = ~day,
+      y = ~ride_distance,
+      type = "bar",
+      marker = list(color = "#7f8c8d")
+    ) %>%
+      layout(
+        title = "Ride Distance Distribution",
+        xaxis = list(title = "Day"),
+        yaxis = list(title = "Ride Distance"),
+        plot_bgcolor = "#ecf0f1",
+        paper_bgcolor = "#ecf0f1"
+      )
+  })
+  
+  # Gráfico 2 - Revenue by Payment Method
+  output$payment_plot <- renderPlotly({
+    df <- data %>%
+      group_by(payment_method) %>%
+      summarise(Total = sum(booking_value))
+    
+    plot_ly(
+      df,
+      x = ~payment_method,
+      y = ~Total,
+      type = "bar",
+      marker = list(color = "#95a5a6")
+    ) %>%
+      layout(
+        title = "Revenue by Payment Method",
+        xaxis = list(title = "Payment Method"),
+        yaxis = list(title = "Booking Value"),
+        plot_bgcolor = "#ecf0f1",
+        paper_bgcolor = "#ecf0f1"
+      )
+  })
+  
+  # Tabla - Top 5 Customers
+  output$top_customers <- renderTable({
+    top_customers
+  })
+}
+
+# ==== Ejecutar ====
+shinyApp(ui, server)
+
+```
