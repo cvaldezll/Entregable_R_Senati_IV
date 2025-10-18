@@ -87,3 +87,45 @@ grafico_valor <- sumatoria_pago %>%
 
 # Muestra el gráfico
 print(grafico_valor)
+
+
+
+
+
+
+# 1. Calcular el valor total de booking_value por cada cliente
+resumen_clientes <- datos %>%
+  group_by(customer_id) %>%
+  summarise(
+    total_booking_value = sum(booking_value, na.rm = TRUE)
+  ) %>%
+  ungroup() # Es buena práctica desagrupar antes de ordenar o seleccionar
+
+# 2. Obtener el Top 5
+top_5_clientes <- resumen_clientes %>%
+  # Ordenar de mayor a menor total_booking_value
+  arrange(desc(total_booking_value)) %>%
+  # Seleccionar las 5 primeras filas
+  head(5)
+
+# 3. Calcular la sumatoria total de esos Top 5
+total_top_5 <- top_5_clientes %>%
+  summarise(
+    customer_id = "Total Top 5", # Asignar una etiqueta para la fila de total
+    total_booking_value = sum(total_booking_value) # Sumar los 5 valores
+  )
+
+# 4. Combinar el Top 5 con la fila de Total
+resultado_final <- top_5_clientes %>%
+  bind_rows(total_top_5)
+
+# Muestra el resultado final (Top 5 + Fila Total)
+print(resultado_final)
+
+
+resul <- datos %>%
+  summarise(
+    primer_reserva = min(date, na.rm = TRUE),
+    ultima_reserva = max(date, na.rm = TRUE)
+  )
+print(resul)
