@@ -31,6 +31,14 @@ source("cargar_data.R")
 source("revenue.R")
 ```
 
+## Cancellation
+
+```{r}
+source("usar_librerias.R")
+source("cargar_data.R")
+source("cancellation.R")
+```
+
 ## Ratings
 
 ```{r}

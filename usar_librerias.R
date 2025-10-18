@@ -11,6 +11,7 @@ library(dplyr)
 library(janitor)
 library(purrr)
 library(lubridate)
+library(tibble)
 
 # Para gráficos
 library(ggplot2)
