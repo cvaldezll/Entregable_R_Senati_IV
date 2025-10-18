@@ -91,10 +91,10 @@ vector_viajes <- total_por_mes %>%
   pull(Total_Viajes)
 
 datos_viajes <- data.frame(
-  Mes = factor(c("Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", 
-                 "Julio", "Agosto", "Setiembre", "Octubre", "Noviembre", "Diciembre"),
-               levels = c("Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", 
-                          "Julio", "Agosto", "Setiembre", "Octubre", "Noviembre", "Diciembre")),
+  Mes = factor(c("Ene", "Feb", "Mar", "Abr", "May", "Jun", 
+                 "Jul", "Ago", "Set", "Oct", "Nov", "Dic"),
+               levels = c("Ene", "Feb", "Mar", "Abr", "May", "Jun", 
+                          "Jul", "Ago", "Set", "Oct", "Nov", "Dic")),
   Volumen = vector_viajes
 )
 
@@ -113,9 +113,9 @@ grafico_area <- ggplot(datos_viajes, aes(x = Mes, y = Volumen, group = 1)) +
   
   # 3. Personalización de Ejes y Títulos
   labs(
-    title = "Ride Volume Over Time",
-    x = "Month",
-    y = "Count of Booking ID"
+    title = "Volumen de viajes a lo largo del tiempo",
+    x = "Mes",
+    y = "Reservas"
   ) +
   
   # 4. Ajuste del Eje Y

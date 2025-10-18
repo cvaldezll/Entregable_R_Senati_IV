@@ -30,3 +30,11 @@ source("usar_librerias.R")
 source("cargar_data.R")
 source("revenue.R")
 ```
+
+## Ratings
+
+```{r}
+source("usar_librerias.R")
+source("cargar_data.R")
+source("ratings.R")
+```
