@@ -9,4 +9,3 @@ datos_agrupados <- datos %>%
   rename(tipo_de_vehiculo = vehicle_type)
 
 print(datos_agrupados)
-
