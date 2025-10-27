@@ -27,7 +27,7 @@ function(input, output, session) {
   })
   
   
-  # Se ejecuta al inicio y cuando se cambia de pestaña
+  # Se ejecuta cuando carga el dashboard y cuando se cambia de pestaña
   # Ejecuta un BACK-END por cada pestaña
   observe({
     pestaña_activa <- input$sidebarMenu
