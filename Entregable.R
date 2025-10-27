@@ -3,7 +3,6 @@ source("usar_librerias.R")
 source("cargar_data.R")   # tibble "pTbData"
 
 
-
 # FUNCIONES PARA CADA PESTAÑA DEL DASHBOARD
 #                           FRONT-END            y BACK-END
 source("overall.R")       # poPageOverall()      y poDaoOverall()
@@ -13,10 +12,8 @@ source("cancellation.R")  # poPageCancellation() y poDaoCancellation()
 source("ratings.R")       # poPageRatings()      y poDaoRatings()
 
 
-
 # 1. ENCABEZADO O TÍTULO (HEADER)
 poHeader <- dashboardHeader(title = "Uber Dashboard", disable = FALSE)
-
 
 
 # 2. PANEL DE PESTAÑAS (SIDEBAR)
@@ -31,7 +28,6 @@ poSidebar <- dashboardSidebar(
     selected = "overall"      # pestaña inicial
   )
 )
-
 
 
 # 3. CUERPO DONDE SE DEFINE EL CONTENIDO DE CADA PESTAÑA (BODY)
@@ -57,15 +53,12 @@ poBody <- dashboardBody(
 )
 
 
-
 # 4. INTERFÁZ DE USUARIO
 poInterfaz <- dashboardPage(poHeader, poSidebar, poBody, skin="black")
 
 
-
 # 5. SERVIDOR (CONTROLLER)
 poController <- source("controller.R")$value
-
 
 
 # 6. EJECUCIÓN DEL DASHBOARD
