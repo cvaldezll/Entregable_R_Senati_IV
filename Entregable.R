@@ -64,7 +64,6 @@ poInterfaz <- dashboardPage(poHeader, poSidebar, poBody, skin="black")
 
 
 # 5. SERVIDOR (CONTROLLER)
-#source("controller.R")
 poController <- source("controller.R")$value
 
 
