@@ -1,4 +1,4 @@
-# Front End
+# FRONT-END
 poPageRatings <- function() {
   tagList(
     fluidRow(
@@ -7,6 +7,7 @@ poPageRatings <- function() {
                  DTOutput("ratings_customer")
              )
       ),
+      
       column(width=6,
              box(title="Driver Ratings", status="primary", solidHeader=TRUE, width=12, 
                  DTOutput("ratings_driver")
@@ -16,7 +17,7 @@ poPageRatings <- function() {
   )
 }
 
-# Back End
+# BACK-END
 poDaoRatings <- function(tTbDatos) {
   print("**************** BackEnd: ratings ****************")
   
@@ -66,9 +67,10 @@ poDaoRatings <- function(tTbDatos) {
   
   
   
-  # ESTO ES PARA poBackEnd DE ENTREGABLE.R
+  # ESTO ES PARA EL CONTROLLER EN ENTREGABLE.R
+  # PARA ACTUALIZAR LA DATA EN EL FRONT-END
   return(list(
-    customer = resultados_dplyr,
-    driver   = resultados_dplyr2
+    customer = resultados_dplyr, # ratings_customer
+    driver   = resultados_dplyr2 # ratings_driver
   ))
 }

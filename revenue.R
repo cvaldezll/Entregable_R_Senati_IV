@@ -1,8 +1,7 @@
-# Front End
+# FRONT-END
 poPageRevenue <- function() {
   tagList(
     fluidRow(
-      # Columna para la distribución de la distancia del viaje (gráfico superior)
       column(width=12,
              box(title="Ride Distance Distribution", status="primary", solidHeader=TRUE, width=12,
                plotOutput("revenue_ride_distance_distribution")
@@ -11,14 +10,12 @@ poPageRevenue <- function() {
     ),
     
     fluidRow(
-      # Columna para los ingresos por método de pago (gráfico inferior izquierdo)
       column(width = 8,
              box(title="Revenue by Payment Method", status="primary", solidHeader=TRUE, width=12,
                plotOutput("revenue_payment_method")
              )
       ),
       
-      # Columna para los 5 mejores clientes y el selector de fecha (derecha)
       column(width = 4,
              box(title="Top 5 Customers", status="primary", solidHeader=TRUE, width=12,
                DTOutput("revenue_top_customers")
@@ -32,7 +29,7 @@ poPageRevenue <- function() {
   )
 }
 
-# Back End
+# BACK-END
 poDaoRevenue <- function(tTbDatos) {
   print("**************** BackEnd: revenue ****************")
   
@@ -165,10 +162,11 @@ poDaoRevenue <- function(tTbDatos) {
   
   
   
-  # ESTO ES PARA poBackEnd DE ENTREGABLE.R
+  # ESTO ES PARA EL CONTROLLER EN ENTREGABLE.R
+  # PARA ACTUALIZAR LA DATA EN EL FRONT-END
   return(list(
-    grafico_ride_distance_distribution = grafico,
-    grafico_revenue_payment_method     = grafico_valor,
-    revenue_top_customers              = resultado_final
+    grafico_ride_distance_distribution = grafico,        # revenue_ride_distance_distribution
+    grafico_revenue_payment_method     = grafico_valor,  # revenue_payment_method
+    revenue_top_customers              = resultado_final # revenue_top_customers
   ))
 }

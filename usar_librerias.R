@@ -1,26 +1,19 @@
-# install.packages(c("shiny", "shinydashboard", "DT"))
-# install.packages("tidyverse", "dplyr")
-# install.packages("dslabs")
-# install.packages("janitor")
-# install.packages("plotly")
-
-
-# shiny y dashboard
-library(shiny)
-library(shinydashboard)
-library(DT)
-library(plotly)
-
-
-# Para preparar la data
+# install.packages(c("tidyverse", "dplyr", "dslabs", "janitor"))
+# PARA PREPARAR LA DATA
 library(tidyverse)
 library(dplyr)
 library(janitor)
 library(purrr)
 library(lubridate)
 library(tibble)
-
-
-# Para gráficos
+# PARA GRÁFICOS
 library(ggplot2)
-library(scales) # Necesario para formatear el porcentaje
+library(scales) # necesario para formatear el porcentaje
+
+
+# install.packages(c("shiny", "shinydashboard", "DT", "plotly"))
+# SHINY Y DASHBOARD
+library(shiny)
+library(shinydashboard)
+library(DT)
+library(plotly)

@@ -1,16 +1,12 @@
-# Front End
+# FRONT-END
 poPageVehicleType <- function() {
   tagList(
-    # Fila para el rango de fechas
     fluidRow(
-      # Utilizamos un box para simular el área superior con el selector de fecha/rango
       box(title="Date", status="primary", solidHeader=TRUE, width=12,
-        # Selector de fechas (simulación)
         dateRangeInput("vehicle_date_range", label=NULL, start=as.Date("2024-01-01"), end=as.Date("2024-12-30"))
       )
     ),
     
-    # Fila principal para la tabla (el componente central de la imagen)
     fluidRow(
       box(title="Metrics", status="primary", solidHeader=TRUE, width=12,
         DTOutput("vehicle_type_table")
@@ -19,7 +15,7 @@ poPageVehicleType <- function() {
   )
 }
 
-# Back End
+# BACK-END
 poDaoVehicleType <- function(tTbDatos) {
   print("**************** BackEnd: vehicle_type ****************")
 
@@ -37,8 +33,9 @@ poDaoVehicleType <- function(tTbDatos) {
   
   
   
-  # ESTO ES PARA poBackEnd DE ENTREGABLE.R
+  # ESTO ES PARA EL CONTROLLER EN ENTREGABLE.R
+  # PARA ACTUALIZAR LA DATA EN EL FRONT-END
   return(list(
-    tabla_de_tipos  = datos_agrupados
+    tabla_de_tipos  = datos_agrupados # vehicle_type_table
   ))
 }

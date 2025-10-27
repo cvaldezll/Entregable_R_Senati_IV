@@ -1,33 +1,37 @@
-# Front End
+# FRONT-END
 poPageCancellation <- function() {
   tagList(
     fluidRow(
-      # Columna para los gráficos de pastel
       column(width = 8,
              box(title="Cancelled Rides by Customers", status="primary", solidHeader=TRUE, width=12, 
                  plotOutput("cancellation_customers")
              ),
+             
              box(title="Cancelled Rides by Drivers", status="primary", solidHeader=TRUE, width=12, 
                  plotOutput("cancellation_drivers")
              )
       ),
-      # Columna para el selector de fecha y los totales
+      
       column(width = 4,
              box(title="Date", status="primary", solidHeader=TRUE, width=12,
                dateRangeInput("cancellation_date_range", label=NULL, start=as.Date("2024-01-01"), end=as.Date("2024-12-30"))
              ),
+             
              box(title="Total Bookings", status="primary", solidHeader=TRUE, width=12,
                  div(style="text-align: center; font-size: 2rem;", 
                      textOutput("cancellation_total_bookings"))
              ),
+             
              box(title="Success Bookings", status="primary", solidHeader=TRUE, width=12,
                  div(style="text-align: center; font-size: 2rem;", 
                      textOutput("cancellation_success_bookings"))
              ),
+             
              box(title="Cancelled Bookings", status="primary", solidHeader=TRUE, width=12,
                  div(style="text-align: center; font-size: 2rem;", 
                      textOutput("cancellation_bookings"))
              ),
+             
              box(title="Cancellation Rate", status="primary", solidHeader=TRUE, width=12,
                  div(style="text-align: center; font-size: 2rem;", 
                      textOutput("cancellation_rate"))
@@ -37,7 +41,7 @@ poPageCancellation <- function() {
   )
 }
 
-# Back End
+# BACK-END
 poDaoCancellation <- function(tTbDatos) {
   print("**************** BackEnd: cancellation ****************")
   
@@ -61,7 +65,7 @@ poDaoCancellation <- function(tTbDatos) {
       
       # 1. Crear las etiquetas de valor (K + Porcentaje)
       Etiqueta_Valor = paste0(
-        format(round(Conteo / 1024, 2), nsmall = 2), "K (", 
+        format(round(Conteo / 1000, 2), nsmall = 2), "K (", 
         round(Porcentaje * 100, 2), "%)"
       ),
       
@@ -142,7 +146,7 @@ poDaoCancellation <- function(tTbDatos) {
       
       # 1. Crear las etiquetas de valor (K + Porcentaje)
       Etiqueta_Valor = paste0(
-        format(round(Conteo / 1024, 2), nsmall = 2), "K (", 
+        format(round(Conteo / 1000, 2), nsmall = 2), "K (", 
         round(Porcentaje * 100, 2), "%)"
       ),
       
@@ -259,13 +263,14 @@ poDaoCancellation <- function(tTbDatos) {
   
   
   
-  # ESTO ES PARA poBackEnd DE ENTREGABLE.R
+  # ESTO ES PARA EL CONTROLLER EN ENTREGABLE.R
+  # PARA ACTUALIZAR LA DATA EN EL FRONT-END
   return(list(
-    grafico_customers  = grafico_final_corregido,
-    grafico_drivers    = grafico_final_corregido2,
-    total_bookings     = resul2[1],
-    success_bookings   = resul3[1],
-    cancelled_bookings = resul4[1],
-    cancellation_rate  = porcentaje_cancelado[1,2]
+    grafico_customers  = grafico_final_corregido,  # cancellation_customers
+    grafico_drivers    = grafico_final_corregido2, # cancellation_drivers
+    total_bookings     = resul2[1],                # cancellation_total_bookings
+    success_bookings   = resul3[1],                # cancellation_success_bookings
+    cancelled_bookings = resul4[1],                # cancellation_bookings
+    cancellation_rate  = porcentaje_cancelado[1,2] # cancellation_rate
   ))
 }

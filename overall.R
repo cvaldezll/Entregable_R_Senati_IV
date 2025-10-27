@@ -1,4 +1,4 @@
-# Front End
+# FRONT-END
 poPageOverall <- function() {
   tagList(
     fluidRow(
@@ -30,7 +30,7 @@ poPageOverall <- function() {
   )
 }
 
-# Back End
+# BACK-END
 poDaoOverall <- function(tTbDatos) {
   print("**************** BackEnd: overall ****************")
   
@@ -77,7 +77,7 @@ poDaoOverall <- function(tTbDatos) {
       
       # 1. Crear las etiquetas de valor (K + Porcentaje)
       Etiqueta_Valor = paste0(
-        format(round(Conteo / 1024, 2), nsmall = 2), "K (", 
+        format(round(Conteo / 1000, 2), nsmall = 2), "K (", 
         round(Porcentaje * 100, 2), "%)"
       ),
       
@@ -205,10 +205,11 @@ poDaoOverall <- function(tTbDatos) {
   
   
   
-  # ESTO ES PARA poBackEnd DE ENTREGABLE.R
+  # ESTO ES PARA EL CONTROLLER EN ENTREGABLE.R
+  # PARA ACTUALIZAR LA DATA EN EL FRONT-END
   return(list(
-    total_reservas = resul2[1],
-    grafico_pastel = grafico_final_corregido,
-    grafico_linea  = grafico_area
+    total_reservas = resul2[1],               # overall_total_bookings
+    grafico_pastel = grafico_final_corregido, # overall_booking_status_plot
+    grafico_linea  = grafico_area             # overall_ride_volume_plot
   ))
 }
