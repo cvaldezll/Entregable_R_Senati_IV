@@ -4,11 +4,11 @@ poPageCancellation <- function() {
     fluidRow(
       column(width = 8,
              box(title="Cancelled Rides by Customers", status="primary", solidHeader=TRUE, width=12, 
-                 plotOutput("cancellation_customers")
+                 plotOutput("cancellation_customers") # del CONTROLLER
              ),
              
              box(title="Cancelled Rides by Drivers", status="primary", solidHeader=TRUE, width=12, 
-                 plotOutput("cancellation_drivers")
+                 plotOutput("cancellation_drivers") # del CONTROLLER
              )
       ),
       
@@ -19,22 +19,22 @@ poPageCancellation <- function() {
              
              box(title="Total Bookings", status="primary", solidHeader=TRUE, width=12,
                  div(style="text-align: center; font-size: 2rem;", 
-                     textOutput("cancellation_total_bookings"))
+                     textOutput("cancellation_total_bookings")) # del CONTROLLER
              ),
              
              box(title="Success Bookings", status="primary", solidHeader=TRUE, width=12,
                  div(style="text-align: center; font-size: 2rem;", 
-                     textOutput("cancellation_success_bookings"))
+                     textOutput("cancellation_success_bookings")) # del CONTROLLER
              ),
              
              box(title="Cancelled Bookings", status="primary", solidHeader=TRUE, width=12,
                  div(style="text-align: center; font-size: 2rem;", 
-                     textOutput("cancellation_bookings"))
+                     textOutput("cancellation_bookings")) # del CONTROLLER
              ),
              
              box(title="Cancellation Rate", status="primary", solidHeader=TRUE, width=12,
                  div(style="text-align: center; font-size: 2rem;", 
-                     textOutput("cancellation_rate"))
+                     textOutput("cancellation_rate")) # del CONTROLLER
              )
       )
     )

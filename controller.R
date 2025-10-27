@@ -68,7 +68,7 @@ function(input, output, session) {
   })
   
   
-  # Actualiza los datos de la pestaña "overall"
+  # Actualiza los datos para el FRONT-END de la pestaña "overall"
   output$overall_total_bookings      <- renderText({
     if (is.null(resultados_cache$overall)) return("Cargando...")
     valor <- resultados_cache$overall$total_reservas # del BACK-END
@@ -83,7 +83,7 @@ function(input, output, session) {
     resultados_cache$overall$grafico_linea           # del BACK-END
   })
   
-  # Actualiza los datos de la pestaña "vehicle_type"
+  # Actualiza los datos para el FRONT-END de la pestaña "vehicle_type"
   output$vehicle_type_table <- renderDT({
     if (is.null(resultados_cache$vehicle)) return("Cargando...")
     
@@ -103,7 +103,7 @@ function(input, output, session) {
     )
   })
   
-  # Actualiza los datos de la pestaña "revenue"
+  # Actualiza los datos para el FRONT-END de la pestaña "revenue"
   output$revenue_ride_distance_distribution <- renderPlot({
     if (is.null(resultados_cache$revenue)) return("Cargando...")
     resultados_cache$revenue$grafico_ride_distance_distribution # del BACK-END
@@ -123,7 +123,7 @@ function(input, output, session) {
     )
   })
   
-  # Actualiza los datos de la pestaña "cancellation"
+  # Actualiza los datos para el FRONT-END de la pestaña "cancellation"
   output$cancellation_customers        <- renderPlot({
     if (is.null(resultados_cache$cancellation)) return("Cargando...")
     resultados_cache$cancellation$grafico_customers           # del BACK-END
@@ -153,7 +153,7 @@ function(input, output, session) {
     paste0(format(round(valor * 1.00, 2), nsmall=2), "%")
   })
   
-  # Actualiza los datos de la pestaña "ratings"
+  # Actualiza los datos para el FRONT-END de la pestaña "ratings"
   output$ratings_customer              <- renderDT({
     if (is.null(resultados_cache$ratings)) return("Cargando...")
     

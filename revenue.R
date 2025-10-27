@@ -4,7 +4,7 @@ poPageRevenue <- function() {
     fluidRow(
       column(width=12,
              box(title="Ride Distance Distribution", status="primary", solidHeader=TRUE, width=12,
-               plotOutput("revenue_ride_distance_distribution")
+               plotOutput("revenue_ride_distance_distribution") # del CONTROLLER
              )
       )
     ),
@@ -12,13 +12,13 @@ poPageRevenue <- function() {
     fluidRow(
       column(width = 8,
              box(title="Revenue by Payment Method", status="primary", solidHeader=TRUE, width=12,
-               plotOutput("revenue_payment_method")
+               plotOutput("revenue_payment_method") # del CONTROLLER
              )
       ),
       
       column(width = 4,
              box(title="Top 5 Customers", status="primary", solidHeader=TRUE, width=12,
-               DTOutput("revenue_top_customers")
+               DTOutput("revenue_top_customers") # del CONTROLLER
              ),
              
              box(title="Date", status="primary", solidHeader=TRUE, width=12,

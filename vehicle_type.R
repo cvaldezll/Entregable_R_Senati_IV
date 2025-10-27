@@ -9,7 +9,7 @@ poPageVehicleType <- function() {
     
     fluidRow(
       box(title="Metrics", status="primary", solidHeader=TRUE, width=12,
-        DTOutput("vehicle_type_table")
+        DTOutput("vehicle_type_table") # del CONTROLLER
       )
     )
   )

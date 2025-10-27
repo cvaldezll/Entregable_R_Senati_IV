@@ -4,13 +4,13 @@ poPageRatings <- function() {
     fluidRow(
       column(width=6,
              box(title="Customer Ratings", status="primary", solidHeader=TRUE, width=12, 
-                 DTOutput("ratings_customer")
+                 DTOutput("ratings_customer") # del CONTROLLER
              )
       ),
       
       column(width=6,
              box(title="Driver Ratings", status="primary", solidHeader=TRUE, width=12, 
-                 DTOutput("ratings_driver")
+                 DTOutput("ratings_driver") # del CONTROLLER
              )
       )
     ),
