@@ -1,6 +1,7 @@
 cat("\014")               # limpia la consola
 source("usar_librerias.R")
 source("cargar_data.R")   # tibble "pTbData"
+source("estilos.R")       # estilos del dashboard (como CSS)
 
 
 # FUNCIONES PARA CADA PESTAÑA DEL DASHBOARD
@@ -32,17 +33,7 @@ poSidebar <- dashboardSidebar(
 
 # 3. CUERPO DONDE SE DEFINE EL CONTENIDO DE CADA PESTAÑA (BODY)
 poBody <- dashboardBody(
-  tags$head(
-    tags$style(
-      HTML("
-        .box-header .box-title {
-          float: none !important; /* Desactiva la alineación a la izquierda por defecto */
-          display: block;         /* Opcional: Ayuda a asegurar el centrado */
-          text-align: center;     /* Centra el texto */
-        }
-      ")
-    )
-  ),
+  estilosBody(), # estilos del dashboardBody
   tabItems(
     tabItem(tabName="overall"     , poPageOverall()     ), # FRONT-END de overall.R
     tabItem(tabName="vehicle_type", poPageVehicleType() ), # FRONT-END de vehicle_type.R
