@@ -34,3 +34,12 @@ map2_chr(nombres_columnas, tipos_columnas, ~ paste0(.x, " (", .y, ")")) %>%
 
 # DATA DE MUESTRA
 print(head(pTbData))
+
+
+
+# CREDENCIALES PARA EL LOGIN
+pDfCredenciales <- data.frame(
+  user = c("admin", "root"),
+  password = c("admin", "root"),
+  stringsAsFactors = FALSE
+)

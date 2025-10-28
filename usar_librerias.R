@@ -11,9 +11,10 @@ library(ggplot2)
 library(scales) # necesario para formatear el porcentaje
 
 
-# install.packages(c("shiny", "shinydashboard", "DT", "plotly"))
-# SHINY Y DASHBOARD
+# install.packages(c("shiny", "shinydashboard", "shinymanager", "DT", "plotly"))
+# SHINY, DASHBOARD Y LOGIN
 library(shiny)
+library(shinymanager)
 library(shinydashboard)
 library(DT)
 library(plotly)

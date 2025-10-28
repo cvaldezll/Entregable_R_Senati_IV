@@ -1,6 +1,6 @@
 cat("\014")               # limpia la consola
 source("usar_librerias.R")
-source("cargar_data.R")   # tibble "pTbData"
+source("cargar_data.R")   # tibble "pTbData" y dataframe "pDfCredenciales"
 source("estilos.R")       # estilos del dashboard (como CSS)
 
 
@@ -14,7 +14,7 @@ source("ratings.R")       # poPageRatings()      y poDaoRatings()
 
 
 # 1. ENCABEZADO O TÍTULO (HEADER)
-poHeader <- dashboardHeader(title = "Uber Dashboard", disable = FALSE)
+poHeader <- dashboardHeader(title="Uber Dashboard", disable=FALSE)
 
 
 # 2. PANEL DE PESTAÑAS (SIDEBAR)
@@ -33,7 +33,6 @@ poSidebar <- dashboardSidebar(
 
 # 3. CUERPO DONDE SE DEFINE EL CONTENIDO DE CADA PESTAÑA (BODY)
 poBody <- dashboardBody(
-  estilosBody(), # estilos del dashboardBody
   tabItems(
     tabItem(tabName="overall"     , poPageOverall()     ), # FRONT-END de overall.R
     tabItem(tabName="vehicle_type", poPageVehicleType() ), # FRONT-END de vehicle_type.R
@@ -45,11 +44,21 @@ poBody <- dashboardBody(
 
 
 # 4. INTERFÁZ DE USUARIO
-poInterfaz <- dashboardPage(poHeader, poSidebar, poBody, skin="black")
+poInterfaz <- tagList(
+  estilosBody(),   # estilos del dashboardBody
+  dashboardPage(poHeader, poSidebar, poBody, skin="black")
+)
+# Envolviendo en modo seguro (LOGIN):
+poInterfaz_secure <- secure_app(poInterfaz, theme="cyborg", background="gray", language="es")
 
 
 # 5. SERVIDOR (CONTROLLER)
-poController <- source("controller.R")$value
+poController        <- source("controller.R")$value
+# Envolviendo en modo seguro (LOGIN):
+poController_secure <- function(input, output, session) {
+  res_auth <- secure_server(check_credentials = check_credentials(pDfCredenciales))
+  poController(input, output, session)
+}
 
 
 
@@ -62,4 +71,4 @@ poController <- source("controller.R")$value
 ################################################################################
 
 # 6. EJECUCIÓN DEL DASHBOARD
-shinyApp(ui=poInterfaz, server=poController)
+shinyApp(ui=poInterfaz_secure, server=poController_secure)
