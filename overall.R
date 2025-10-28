@@ -94,43 +94,36 @@ poDaoOverall <- function(tTbDatos) {
   
   
   # Gráfico
-  grafico_final_corregido <- ggplot(datos_pastel_final, 
-                                    aes(x = factor(1), y = Porcentaje, 
-                                        fill = booking_status)) +
+  grafico_final_corregido <- ggplot(datos_pastel_final, aes(x = factor(1), y = Porcentaje, fill = booking_status)) +
     
-    # 1. Dibuja las rebanadas
+    # Gráfico de barras que después se transformará a pastel
     geom_bar(stat = "identity", width = 1, color = "white") +
     
-    # 2. Coloca las etiquetas afuera
+    # Coloca las etiquetas afuera
     geom_text(
-      # Mapea 'y' a la posición central calculada para que la etiqueta se alinee con su rebanada
-      aes(y = Posicion_Y, 
-          label = Etiqueta_Valor),
-      
-      # Fijamos la posición X (e.g., 1.5) para ubicar el texto fuera del pastel (1 es el borde)
-      x = 1.5, 
-      
-      size = 4, 
-      color = "black" # Aseguramos que el color del texto sea visible
+      aes(y = Posicion_Y, label = Etiqueta_Valor), # mapea 'y' a la posición central calculada para que la etiqueta se alinee con su rebanada
+      x = 1.5, # fijamos la posición X (e.g., 1.5) para ubicar el texto fuera del pastel (1 es el borde)
+      size = 4, # tamaño del texto
+      color = "black", # aseguramos que el color del texto sea visible
+      fontface = "bold" # negrita
     ) +
     
-    # 3. Transformación a Polares
-    # Es crucial para la apariencia del pastel
+    # Transforma el gráfico de barra para apariencia de pastel
     coord_polar(theta = "y", start = 0) +
     
-    # 4. Personalización y Títulos
-    labs(
-      #title = "Desglose del Estado de las Reservas",
-      fill = "Booking Status",
-      x = NULL,
-      y = NULL
-    ) +
+    # Definición de paleta de colores
+    scale_fill_brewer(palette = "Set2") +
     
-    # 5. Tema (Limpieza)
+    # Personalización y Títulos
+    labs(fill = "Booking Status", x = NULL, y = NULL) +
+    
+    # Tema (Limpieza)
     theme_void() +
     theme(
       plot.title = element_text(hjust = 0.5, face = "bold", size = 16),
-      legend.position = "right"
+      legend.position = "right",
+      legend.title = element_text(face = "bold", size = 12),
+      legend.text = element_text(size = 10)
     )
   
   # Mostrar el gráfico
@@ -175,30 +168,31 @@ poDaoOverall <- function(tTbDatos) {
   # GRAFICO
   grafico_area <- ggplot(datos_viajes, aes(x = Mes, y = Volumen, group = 1)) +
     
-    # 1. Gráfico de Área (relleno)
+    # Gráfico de Área (relleno)
     # Usamos 'fill' para el color de relleno y 'alpha' para la transparencia si es necesario
     geom_area(fill = "skyblue", color = NA, alpha = 0.8) +
     
-    # 2. Línea sobre el área (para el borde)
+    # Línea sobre el área (para el borde)
     # Usamos 'color' para el color de la línea y 'size' para el grosor
     geom_line(color = "darkblue", size = 1) +
     
-    # 3. Personalización de Ejes y Títulos
-    labs(
-      #title = "Volumen de viajes a lo largo del tiempo",
-      x = "Month",
-      y = "Count of Booking ID"
-    ) +
+    # Personalización de Ejes y Títulos
+    labs(x = "Month", y = "Count of Booking ID") +
     
-    # 4. Ajuste del Eje Y
+    # Ajuste del Eje Y
     # Para un mejor visual, ajustamos los límites para que se parezca al gráfico (que empieza cerca de 12,000)
     ylim(min(datos_viajes$Volumen) - 100, max(datos_viajes$Volumen) + 100) +
     
-    # 5. Temas y Formato (para una apariencia limpia por defecto)
+    # Temas y Formato (para una apariencia limpia por defecto)
     theme_minimal() +
     
-    # 6. Ajustar el ángulo de las etiquetas del eje X si es necesario (no necesario en este caso)
-    theme(axis.text.x = element_text(angle = 0, hjust = 0.5))
+    # Ajustar el ángulo de las etiquetas del eje X si es necesario (no necesario en este caso)
+    theme(
+      axis.title.x = element_text(face = "bold", size = 12),
+      axis.title.y = element_text(face = "bold", size = 12),
+      axis.text.x = element_text(angle = 0, hjust = 0.5, size = 10),
+      axis.text.y = element_text(size = 10)
+    )
   
   # Mostrar el gráfico
   ###print(grafico_area)

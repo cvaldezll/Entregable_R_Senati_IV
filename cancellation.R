@@ -82,43 +82,36 @@ poDaoCancellation <- function(tTbDatos) {
   
   
   # Gráfico
-  grafico_final_corregido <- ggplot(datos_pastel_final, 
-                                    aes(x = factor(1), y = Porcentaje, 
-                                        fill = reason_for_cancelling_by_customer)) +
+  grafico_final_corregido <- ggplot(datos_pastel_final, aes(x = factor(1), y = Porcentaje, fill = reason_for_cancelling_by_customer)) +
     
-    # 1. Dibuja las rebanadas
+    # Gráfico de barras que después se transformará a pastel
     geom_bar(stat = "identity", width = 1, color = "white") +
     
-    # 2. Coloca las etiquetas afuera
+    # Coloca las etiquetas afuera
     geom_text(
-      # Mapea 'y' a la posición central calculada para que la etiqueta se alinee con su rebanada
-      aes(y = Posicion_Y, 
-          label = Etiqueta_Valor),
-      
-      # Fijamos la posición X (e.g., 1.5) para ubicar el texto fuera del pastel (1 es el borde)
-      x = 1.5, 
-      
-      size = 4, 
-      color = "black" # Aseguramos que el color del texto sea visible
+      aes(y = Posicion_Y, label = Etiqueta_Valor), # mapea 'y' a la posición central calculada para que la etiqueta se alinee con su rebanada
+      x = 1.5, # fijamos la posición X (e.g., 1.5) para ubicar el texto fuera del pastel (1 es el borde)
+      size = 4, # tamaño del texto
+      color = "black", # aseguramos que el color del texto sea visible
+      fontface = "bold" # negrita
     ) +
     
-    # 3. Transformación a Polares
-    # Es crucial para la apariencia del pastel
+    # Transforma el gráfico de barra para apariencia de pastel
     coord_polar(theta = "y", start = 0) +
     
-    # 4. Personalización y Títulos
-    labs(
-      #title = "Viajes Cancelados por Clientes",
-      fill = "Cancellation Reason",
-      x = NULL,
-      y = NULL
-    ) +
+    # Definición de paleta de colores
+    scale_fill_brewer(palette = "Set2") +
     
-    # 5. Tema (Limpieza)
+    # Personalización y Títulos
+    labs(fill = "Cancellation Reason", x = NULL, y = NULL) +
+    
+    # Tema (Limpieza)
     theme_void() +
     theme(
       plot.title = element_text(hjust = 0.5, face = "bold", size = 16),
-      legend.position = "right"
+      legend.position = "right",
+      legend.title = element_text(face = "bold", size = 12),
+      legend.text = element_text(size = 10)
     )
   
   # Mostrar el gráfico
@@ -163,43 +156,36 @@ poDaoCancellation <- function(tTbDatos) {
   
   
   # Gráfico
-  grafico_final_corregido2 <- ggplot(datos_pastel_final2, 
-                                     aes(x = factor(1), y = Porcentaje, 
-                                         fill = driver_cancellation_reason)) +
+  grafico_final_corregido2 <- ggplot(datos_pastel_final2, aes(x = factor(1), y = Porcentaje, fill = driver_cancellation_reason)) +
     
-    # 1. Dibuja las rebanadas
+    # Gráfico de barras que después se transformará a pastel
     geom_bar(stat = "identity", width = 1, color = "white") +
     
-    # 2. Coloca las etiquetas afuera
+    # Coloca las etiquetas afuera
     geom_text(
-      # Mapea 'y' a la posición central calculada para que la etiqueta se alinee con su rebanada
-      aes(y = Posicion_Y, 
-          label = Etiqueta_Valor),
-      
-      # Fijamos la posición X (e.g., 1.5) para ubicar el texto fuera del pastel (1 es el borde)
-      x = 1.5, 
-      
-      size = 4, 
-      color = "black" # Aseguramos que el color del texto sea visible
+      aes(y = Posicion_Y, label = Etiqueta_Valor), # mapea 'y' a la posición central calculada para que la etiqueta se alinee con su rebanada
+      x = 1.5, # fijamos la posición X (e.g., 1.5) para ubicar el texto fuera del pastel (1 es el borde)
+      size = 4, # tamaño del texto
+      color = "black", # aseguramos que el color del texto sea visible
+      fontface = "bold" # negrita
     ) +
     
-    # 3. Transformación a Polares
-    # Es crucial para la apariencia del pastel
+    # Transforma el gráfico de barra para apariencia de pastel
     coord_polar(theta = "y", start = 0) +
     
-    # 4. Personalización y Títulos
-    labs(
-      #title = "Viajes Cancelados por Conductores",
-      fill = "Cancellation Reason",
-      x = NULL,
-      y = NULL
-    ) +
+    # Definición de paleta de colores
+    scale_fill_brewer(palette = "Set2") +
     
-    # 5. Tema (Limpieza)
+    # Personalización y Títulos
+    labs(fill = "Cancellation Reason", x = NULL, y = NULL) +
+    
+    # Tema (Limpieza)
     theme_void() +
     theme(
       plot.title = element_text(hjust = 0.5, face = "bold", size = 16),
-      legend.position = "right"
+      legend.position = "right",
+      legend.title = element_text(face = "bold", size = 12),
+      legend.text = element_text(size = 10)
     )
   
   # Mostrar el gráfico

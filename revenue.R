@@ -44,26 +44,22 @@ poDaoRevenue <- function(tTbDatos) {
   ###print(sumatoria)
   
   # 2. Creación del gráfico de barras
-  grafico <- sumatoria %>%
-    # Mapeamos 'dia_del_mes' al eje X (como factor) y 'suma_ride_distance' al eje Y
-    ggplot(aes(x = factor(dia_del_mes), y = suma_ride_distance)) +
+  grafico <- ggplot(sumatoria, aes(x = factor(dia_del_mes), y = suma_ride_distance)) +
     
-    # *** ESTA FUNCIÓN ES LA CLAVE PARA LAS BARRAS ***
+    # Gráfico de barras
     geom_col() + 
     
     # Etiquetas y títulos
-    labs(
-      #title = "Suma Total de Distancia Recorrida por Día del Mes",
-      #subtitle = "El valor representa la suma de todos los viajes para ese día (1-31) a través del tiempo.",
-      x = "Day",
-      y = "Ride Distance"
-    ) +
+    labs(x = "Day", y = "Ride Distance" ) +
     
     # Tema y ajustes para legibilidad
     theme_minimal() +
     theme(
-      axis.text.x = element_text(angle = 0),
-      panel.grid.major.x = element_blank()
+      axis.title.x = element_text(face = "bold", size = 12),
+      axis.title.y = element_text(face = "bold", size = 12),
+      axis.text.x = element_text(angle = 0, size = 10),
+      axis.text.y = element_text(size = 10),
+      panel.grid.major.x = element_blank() # elimina las línea verticales del fondo del gráfico
     )
   
   ###print(grafico)
@@ -85,33 +81,30 @@ poDaoRevenue <- function(tTbDatos) {
   ###print(sumatoria_pago)
   
   
-  grafico_valor <- sumatoria_pago %>%
-    # Mapeamos 'payment_method' al eje X y 'total_booking_value' al eje Y
-    # Se usa fill con el mismo vector de x para indicar que cada barra debe tener diferente color
-    ggplot(aes(x = payment_method_factor, y = total_booking_value, fill = payment_method_factor)) +
+  grafico_valor <- ggplot(sumatoria_pago, aes(x = payment_method_factor, y = total_booking_value, fill = payment_method_factor)) +
     
-    # Usamos geom_col() para generar las barras
+    # Gráfico de columnas
     geom_col() +
     
+    # Definición de paleta de colores
+    scale_fill_brewer(palette = "Set2") +
+    
     # Etiquetas y títulos
-    labs(
-      #title = "Ingresos Totales (Booking Value) por Método de Pago",
-      x = "Payment Method",
-      y = "Booking Value"
-    ) +
+    labs(x = "Payment Method", y = "Booking Value") +
     
     # Mejorar la escala del eje Y (útil para grandes sumas de dinero)
     scale_y_continuous(labels = scales::dollar_format(prefix = "$", big.mark = ",")) +
     
-    # sin leyenda
+    # Sin leyenda
     guides(fill = "none") +
     
     # Tema minimalista y ajustes para ordenar las barras
     theme_minimal() +
     theme(
-      # Ordena las barras para que la más alta (mayor ingreso) esté primero
-      # Puedes omitir esta línea si no quieres que estén ordenadas
-      axis.text.x = element_text(angle = 45, hjust = 1) 
+      axis.title.x = element_text(face = "bold", size = 12),
+      axis.title.y = element_text(face = "bold", size = 12),
+      axis.text.x = element_text(angle = 45, hjust = 1, face = "bold", size = 10), # angle y hjust para el orden de las barras
+      axis.text.y = element_text(face = "bold", size = 10)
     )
   
   # Muestra el gráfico
