@@ -19,7 +19,14 @@ poPageRatings <- function() {
 
 # BACK-END
 poDaoRatings <- function(tTbDatos) {
+  print("**************************************************")
   print("**************** BackEnd: ratings ****************")
+  print("**************************************************")
+  print("PRIMEROS REGISTROS:")
+  print(head(tTbDatos))
+  print("ÚLTIMOS REGISTROS:")
+  print(tail(tTbDatos))
+  
   
   # --->>> CUSTOMER RATINGS - VALORACIONES DE LOS CLIENTES <<<---
   # 1. Agrupar por vehicle_type.

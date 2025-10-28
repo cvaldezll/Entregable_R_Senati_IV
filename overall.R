@@ -32,7 +32,13 @@ poPageOverall <- function() {
 
 # BACK-END
 poDaoOverall <- function(tTbDatos) {
+  print("**************************************************")
   print("**************** BackEnd: overall ****************")
+  print("**************************************************")
+  print("PRIMEROS REGISTROS:")
+  print(head(tTbDatos))
+  print("ÚLTIMOS REGISTROS:")
+  print(tail(tTbDatos))
   
   
   # --->>> RANGO DE FECHAS DE RESERVA <<<---
@@ -188,8 +194,8 @@ poDaoOverall <- function(tTbDatos) {
     
     # Ajustar el ángulo de las etiquetas del eje X si es necesario (no necesario en este caso)
     theme(
-      axis.title.x = element_text(face = "bold", size = 12),
-      axis.title.y = element_text(face = "bold", size = 12),
+      axis.title.x = element_text(face = "bold", size = 12, margin=margin(t=20)),
+      axis.title.y = element_text(face = "bold", size = 12, margin=margin(r=20)),
       axis.text.x = element_text(angle = 0, hjust = 0.5, size = 10),
       axis.text.y = element_text(size = 10)
     )

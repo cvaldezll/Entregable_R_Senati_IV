@@ -8,23 +8,23 @@ function(input, output, session) {
   # Tibble "pTbData" filtrado para cada BACK-END de cada pestaña
   datos_overall_filtrados      <- reactive({
     req(input$overall_date_range)      # captura fechas de la pestaña "overall"
-    pTbData %>% filter(date>=input$overall_date_range[1] & date<=input$overall_date_range[2])
+    pTbData %>% filter(date>=input$overall_date_range[1] & date<=input$overall_date_range[2]) %>% arrange(date)
   })
   datos_vehicle_filtrados      <- reactive({
     req(input$vehicle_date_range)      # captura fechas de la pestaña "vehicle_type"
-    pTbData %>% filter(date>=input$vehicle_date_range[1] & date<=input$vehicle_date_range[2])
+    pTbData %>% filter(date>=input$vehicle_date_range[1] & date<=input$vehicle_date_range[2]) %>% arrange(date)
   })
   datos_revenue_filtrados      <- reactive({
     req(input$revenue_date_range)      # captura fechas de la pestaña "revenue"
-    pTbData %>% filter(date>=input$revenue_date_range[1] & date<=input$revenue_date_range[2])
+    pTbData %>% filter(date>=input$revenue_date_range[1] & date<=input$revenue_date_range[2]) %>% arrange(date)
   })
   datos_cancellation_filtrados <- reactive({
     req(input$cancellation_date_range) # captura fechas de la pestaña "cancellation"
-    pTbData %>% filter(date>=input$cancellation_date_range[1] & date<=input$cancellation_date_range[2])
+    pTbData %>% filter(date>=input$cancellation_date_range[1] & date<=input$cancellation_date_range[2]) %>% arrange(date)
   })
   datos_rating_filtrados <- reactive({
     #                                  # no hay fechas en la pestaña "ratings"
-    pTbData
+    pTbData %>% arrange(date)
   })
   
   

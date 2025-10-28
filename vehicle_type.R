@@ -17,8 +17,15 @@ poPageVehicleType <- function() {
 
 # BACK-END
 poDaoVehicleType <- function(tTbDatos) {
+  print("*******************************************************")
   print("**************** BackEnd: vehicle_type ****************")
-
+  print("*******************************************************")
+  print("PRIMEROS REGISTROS:")
+  print(head(tTbDatos))
+  print("ÚLTIMOS REGISTROS:")
+  print(tail(tTbDatos))
+  
+  
   datos_agrupados <- tTbDatos %>%
     group_by(vehicle_type) %>%
     summarise(

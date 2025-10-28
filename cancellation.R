@@ -43,7 +43,14 @@ poPageCancellation <- function() {
 
 # BACK-END
 poDaoCancellation <- function(tTbDatos) {
+  print("*******************************************************")
   print("**************** BackEnd: cancellation ****************")
+  print("*******************************************************")
+  print("PRIMEROS REGISTROS:")
+  print(head(tTbDatos))
+  print("ÚLTIMOS REGISTROS:")
+  print(tail(tTbDatos))
+  
   
   # --->>> VIAJES CANCELADOS POR CLIENTES - CANCELLED RIDES BY CUSTOMERS <<<---
   # Data

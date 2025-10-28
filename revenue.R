@@ -31,7 +31,14 @@ poPageRevenue <- function() {
 
 # BACK-END
 poDaoRevenue <- function(tTbDatos) {
+  print("**************************************************")
   print("**************** BackEnd: revenue ****************")
+  print("**************************************************")
+  print("PRIMEROS REGISTROS:")
+  print(head(tTbDatos))
+  print("ÚLTIMOS REGISTROS:")
+  print(tail(tTbDatos))
+  
   
   # Viajes por día, indistinto al mes
   sumatoria <- tTbDatos %>%
@@ -55,8 +62,8 @@ poDaoRevenue <- function(tTbDatos) {
     # Tema y ajustes para legibilidad
     theme_minimal() +
     theme(
-      axis.title.x = element_text(face = "bold", size = 12),
-      axis.title.y = element_text(face = "bold", size = 12),
+      axis.title.x = element_text(face = "bold", size = 12, margin=margin(t=20)),
+      axis.title.y = element_text(face = "bold", size = 12, margin=margin(r=20)),
       axis.text.x = element_text(angle = 0, size = 10),
       axis.text.y = element_text(size = 10),
       panel.grid.major.x = element_blank() # elimina las línea verticales del fondo del gráfico
@@ -101,8 +108,8 @@ poDaoRevenue <- function(tTbDatos) {
     # Tema minimalista y ajustes para ordenar las barras
     theme_minimal() +
     theme(
-      axis.title.x = element_text(face = "bold", size = 12),
-      axis.title.y = element_text(face = "bold", size = 12),
+      axis.title.x = element_text(face = "bold", size = 12, margin=margin(t=20)),
+      axis.title.y = element_text(face = "bold", size = 12, margin=margin(r=20)),
       axis.text.x = element_text(angle = 45, hjust = 1, face = "bold", size = 10), # angle y hjust para el orden de las barras
       axis.text.y = element_text(face = "bold", size = 10)
     )
