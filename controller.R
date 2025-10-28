@@ -4,6 +4,7 @@ function(input, output, session) {
   resultados_cache <- reactiveValues(overall=NULL, vehicle=NULL, revenue=NULL, cancellation=NULL, ratings=NULL)
   
   
+  
   # Tibble "pTbData" filtrado para cada BACK-END de cada pestaña
   datos_overall_filtrados      <- reactive({
     req(input$overall_date_range)      # captura fechas de la pestaña "overall"
@@ -25,6 +26,7 @@ function(input, output, session) {
     #                                  # no hay fechas en la pestaña "ratings"
     pTbData
   })
+  
   
   
   # Se ejecuta cuando carga el dashboard y cuando se cambia de pestaña
@@ -68,26 +70,28 @@ function(input, output, session) {
   })
   
   
+  
   # Actualiza los datos para el FRONT-END de la pestaña "overall"
   output$overall_total_bookings      <- renderText({
     if (is.null(resultados_cache$overall)) return("Cargando...")
-    valor <- resultados_cache$overall$total_reservas # del BACK-END
+    valor <- resultados_cache$overall$total_reservas # del BACK-END para el FRONT-END
     paste0(format(round(valor / 1000, 2), nsmall=2), "K")
   })
   output$overall_booking_status_plot <- renderPlot({
     if (is.null(resultados_cache$overall)) return("Cargando...")
-    resultados_cache$overall$grafico_pastel          # del BACK-END
+    resultados_cache$overall$grafico_pastel          # del BACK-END para el FRONT-END
   })
   output$overall_ride_volume_plot    <- renderPlot({
     if (is.null(resultados_cache$overall)) return("Cargando...")
-    resultados_cache$overall$grafico_linea           # del BACK-END
+    resultados_cache$overall$grafico_linea           # del BACK-END para el FRONT-END
   })
+  
   
   # Actualiza los datos para el FRONT-END de la pestaña "vehicle_type"
   output$vehicle_type_table <- renderDT({
     if (is.null(resultados_cache$vehicle)) return("Cargando...")
     
-    vehicle_tabla_formateada <- resultados_cache$vehicle$tabla_de_tipos %>% # del BACK-END
+    vehicle_tabla_formateada <- resultados_cache$vehicle$tabla_de_tipos %>% # del BACK-END para el FRONT-END
       dplyr::mutate(
         `Total Booking value`      = paste0(format(round(`Total Booking value` / 1000 / 1000, 2), nsmall = 2), "M"),
         `Success Booking value`    = paste0(format(round(`Success Booking value` / 1000, 2)     , nsmall = 2), "K"),
@@ -103,61 +107,64 @@ function(input, output, session) {
     )
   })
   
+  
   # Actualiza los datos para el FRONT-END de la pestaña "revenue"
   output$revenue_ride_distance_distribution <- renderPlot({
     if (is.null(resultados_cache$revenue)) return("Cargando...")
-    resultados_cache$revenue$grafico_ride_distance_distribution # del BACK-END
+    resultados_cache$revenue$grafico_ride_distance_distribution # del BACK-END para el FRONT-END
   })
   output$revenue_payment_method             <- renderPlot({
     if (is.null(resultados_cache$revenue)) return("Cargando...")
-    resultados_cache$revenue$grafico_revenue_payment_method     # del BACK-END
+    resultados_cache$revenue$grafico_revenue_payment_method     # del BACK-END para el FRONT-END
   })
   output$revenue_top_customers              <- renderDT({
     if (is.null(resultados_cache$revenue)) return("Cargando...")
     
     datatable(
-      resultados_cache$revenue$revenue_top_customers,           # del BACK-END
+      resultados_cache$revenue$revenue_top_customers,           # del BACK-END para el FRONT-END
       options   = list(dom='t', paging=FALSE, searching=FALSE, ordering=FALSE),
       rownames  = FALSE,
       selection = 'none'
     )
   })
   
+  
   # Actualiza los datos para el FRONT-END de la pestaña "cancellation"
   output$cancellation_customers        <- renderPlot({
     if (is.null(resultados_cache$cancellation)) return("Cargando...")
-    resultados_cache$cancellation$grafico_customers           # del BACK-END
+    resultados_cache$cancellation$grafico_customers           # del BACK-END para el FRONT-END
   })
   output$cancellation_drivers          <- renderPlot({
     if (is.null(resultados_cache$cancellation)) return("Cargando...")
-    resultados_cache$cancellation$grafico_drivers             # del BACK-END
+    resultados_cache$cancellation$grafico_drivers             # del BACK-END para el FRONT-END
   })
   output$cancellation_total_bookings   <- renderText({
     if (is.null(resultados_cache$cancellation)) return("Cargando...")
-    valor <- resultados_cache$cancellation$total_bookings     # del BACK-END
+    valor <- resultados_cache$cancellation$total_bookings     # del BACK-END para el FRONT-END
     paste0(format(round(valor / 1000, 2), nsmall=2), "K")
   })
   output$cancellation_success_bookings <- renderText({
     if (is.null(resultados_cache$cancellation)) return("Cargando...")
-    valor <- resultados_cache$cancellation$success_bookings   # del BACK-END
+    valor <- resultados_cache$cancellation$success_bookings   # del BACK-END para el FRONT-END
     paste0(format(round(valor / 1000, 2), nsmall=2), "K")
   })
   output$cancellation_bookings         <- renderText({
     if (is.null(resultados_cache$cancellation)) return("Cargando...")
-    valor <- resultados_cache$cancellation$cancelled_bookings # del BACK-END
+    valor <- resultados_cache$cancellation$cancelled_bookings # del BACK-END para el FRONT-END
     paste0(format(round(valor / 1000, 2), nsmall=2), "K")
   })
   output$cancellation_rate             <- renderText({
     if (is.null(resultados_cache$cancellation)) return("Cargando...")
-    valor <- resultados_cache$cancellation$cancellation_rate  # del BACK-END
+    valor <- resultados_cache$cancellation$cancellation_rate  # del BACK-END para el FRONT-END
     paste0(format(round(valor * 1.00, 2), nsmall=2), "%")
   })
+  
   
   # Actualiza los datos para el FRONT-END de la pestaña "ratings"
   output$ratings_customer              <- renderDT({
     if (is.null(resultados_cache$ratings)) return("Cargando...")
     
-    ratings_tabla_formateada_customer <- resultados_cache$ratings$customer %>% # del BACK-END
+    ratings_tabla_formateada_customer <- resultados_cache$ratings$customer %>% # del BACK-END para el FRONT-END
       dplyr::mutate(
         `Rating` = paste0(format(round(`Rating`, 4), nsmall = 4), "")
       )
@@ -172,7 +179,7 @@ function(input, output, session) {
   output$ratings_driver                <- renderDT({
     if (is.null(resultados_cache$ratings)) return("Cargando...")
     
-    ratings_tabla_formateada_driver <- resultados_cache$ratings$driver %>% # del BACK-END
+    ratings_tabla_formateada_driver <- resultados_cache$ratings$driver %>% # del BACK-END para el FRONT-END
       dplyr::mutate(
         `Rating` = paste0(format(round(`Rating`, 4), nsmall = 4), "")
       )

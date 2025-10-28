@@ -52,5 +52,14 @@ poInterfaz <- dashboardPage(poHeader, poSidebar, poBody, skin="black")
 poController <- source("controller.R")$value
 
 
+
+################################################################################
+# El Dashboard de Shiny se genera internamente con el framework de Bootstrap.  #
+# Shiny tiene su propia forma de invocar los elementos de bootstrap.           #
+# Cada fila (fluidRow) de cada pestaña es un grid de bootstrap de 12 columnas. #
+# Cada columna (column) de cada fila también es de 12 columnas.                #
+# Cada caja (box) de cada fila o columna también es de 12 columnas.            #
+################################################################################
+
 # 6. EJECUCIÓN DEL DASHBOARD
 shinyApp(ui=poInterfaz, server=poController)

@@ -9,7 +9,7 @@ poPageVehicleType <- function() {
     
     fluidRow(
       box(title="Metrics", status="primary", solidHeader=TRUE, width=12,
-        DTOutput("vehicle_type_table") # del CONTROLLER
+        DTOutput("vehicle_type_table") # se actualiza desde el CONTROLLER
       )
     )
   )
@@ -33,8 +33,7 @@ poDaoVehicleType <- function(tTbDatos) {
   
   
   
-  # ESTO ES PARA EL CONTROLLER EN ENTREGABLE.R
-  # PARA ACTUALIZAR LA DATA EN EL FRONT-END
+  # ESTO RETORNA AL CONTROLLER EN ENTREGABLE.R QUE ACTUALIZA EL FRONT-END
   return(list(
     tabla_de_tipos  = datos_agrupados # vehicle_type_table
   ))

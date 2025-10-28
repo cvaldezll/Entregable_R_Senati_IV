@@ -4,13 +4,13 @@ poPageRatings <- function() {
     fluidRow(
       column(width=6,
              box(title="Customer Ratings", status="primary", solidHeader=TRUE, width=12, 
-                 DTOutput("ratings_customer") # del CONTROLLER
+                 DTOutput("ratings_customer") # se actualiza desde el CONTROLLER
              )
       ),
       
       column(width=6,
              box(title="Driver Ratings", status="primary", solidHeader=TRUE, width=12, 
-                 DTOutput("ratings_driver") # del CONTROLLER
+                 DTOutput("ratings_driver") # se actualiza desde el CONTROLLER
              )
       )
     ),
@@ -67,8 +67,7 @@ poDaoRatings <- function(tTbDatos) {
   
   
   
-  # ESTO ES PARA EL CONTROLLER EN ENTREGABLE.R
-  # PARA ACTUALIZAR LA DATA EN EL FRONT-END
+  # ESTO RETORNA AL CONTROLLER EN ENTREGABLE.R QUE ACTUALIZA EL FRONT-END
   return(list(
     customer = resultados_dplyr, # ratings_customer
     driver   = resultados_dplyr2 # ratings_driver

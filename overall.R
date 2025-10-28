@@ -9,13 +9,13 @@ poPageOverall <- function() {
              
              box(title="Total Bookings", status="primary", solidHeader=TRUE, width=12,
                  div(style="text-align: center; font-size: 2rem;", 
-                     textOutput("overall_total_bookings")) # del CONTROLLER
+                     textOutput("overall_total_bookings")) # se actualiza desde el CONTROLLER
              )
       ),
       
       column(width=8,
              box(title="Booking Status Breakdown", status="primary", solidHeader=TRUE, width=12,
-                 plotOutput("overall_booking_status_plot") # del CONTROLLER
+                 plotOutput("overall_booking_status_plot") # se actualiza desde el CONTROLLER
              )
       )
     ), 
@@ -23,7 +23,7 @@ poPageOverall <- function() {
     fluidRow(
       column(width=12,
              box(title="Ride Volume Over Time", status="primary", solidHeader=TRUE, width=12,
-                 plotOutput("overall_ride_volume_plot") # del CONTROLLER
+                 plotOutput("overall_ride_volume_plot") # se actualiza desde el CONTROLLER
              )
       )
     )
@@ -205,8 +205,7 @@ poDaoOverall <- function(tTbDatos) {
   
   
   
-  # ESTO ES PARA EL CONTROLLER EN ENTREGABLE.R
-  # PARA ACTUALIZAR LA DATA EN EL FRONT-END
+  # ESTO RETORNA AL CONTROLLER EN ENTREGABLE.R QUE ACTUALIZA EL FRONT-END
   return(list(
     total_reservas = resul2[1],               # overall_total_bookings
     grafico_pastel = grafico_final_corregido, # overall_booking_status_plot
