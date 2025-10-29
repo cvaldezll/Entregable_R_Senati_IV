@@ -2,8 +2,11 @@
 # El archivo principal del dashboard se debe llamar app.R  #
 # Para que shinyapps.io lo reconozca al momento de subirlo #
 #                                                          #
-# library(rsconnect)                                       #
-# rsconnect::deployApp( 'path/to/your/app' )               #
+# library(rsconnect)
+# rsconnect::deployApp(
+#   appDir = 'D:/Dropbox/Estudios SENATI/4to Semestre/Lenguaje de Programación para Ciencia de Datos/Entregable/',
+#   appName = 'Entregable-R-Senati-IV'
+# )
 ############################################################
 
 
