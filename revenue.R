@@ -162,7 +162,7 @@ poDaoRevenue <- function(tTbDatos) {
   
   
   
-  # ESTO RETORNA AL CONTROLLER EN ENTREGABLE.R QUE ACTUALIZA EL FRONT-END
+  # ESTO RETORNA AL CONTROLLER EN app.R QUE ACTUALIZA EL FRONT-END
   return(list(
     grafico_ride_distance_distribution = grafico,        # revenue_ride_distance_distribution
     grafico_revenue_payment_method     = grafico_valor,  # revenue_payment_method

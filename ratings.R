@@ -74,7 +74,7 @@ poDaoRatings <- function(tTbDatos) {
   
   
   
-  # ESTO RETORNA AL CONTROLLER EN ENTREGABLE.R QUE ACTUALIZA EL FRONT-END
+  # ESTO RETORNA AL CONTROLLER EN app.R QUE ACTUALIZA EL FRONT-END
   return(list(
     customer = resultados_dplyr, # ratings_customer
     driver   = resultados_dplyr2 # ratings_driver

@@ -256,7 +256,7 @@ poDaoCancellation <- function(tTbDatos) {
   
   
   
-  # ESTO RETORNA AL CONTROLLER EN ENTREGABLE.R QUE ACTUALIZA EL FRONT-END
+  # ESTO RETORNA AL CONTROLLER EN app.R QUE ACTUALIZA EL FRONT-END
   return(list(
     grafico_customers  = grafico_final_corregido,  # cancellation_customers
     grafico_drivers    = grafico_final_corregido2, # cancellation_drivers

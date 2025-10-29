@@ -205,7 +205,7 @@ poDaoOverall <- function(tTbDatos) {
   
   
   
-  # ESTO RETORNA AL CONTROLLER EN ENTREGABLE.R QUE ACTUALIZA EL FRONT-END
+  # ESTO RETORNA AL CONTROLLER EN app.R QUE ACTUALIZA EL FRONT-END
   return(list(
     total_reservas = resul2[1],               # overall_total_bookings
     grafico_pastel = grafico_final_corregido, # overall_booking_status_plot

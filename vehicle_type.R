@@ -40,7 +40,7 @@ poDaoVehicleType <- function(tTbDatos) {
   
   
   
-  # ESTO RETORNA AL CONTROLLER EN ENTREGABLE.R QUE ACTUALIZA EL FRONT-END
+  # ESTO RETORNA AL CONTROLLER EN app.R QUE ACTUALIZA EL FRONT-END
   return(list(
     tabla_de_tipos  = datos_agrupados # vehicle_type_table
   ))
